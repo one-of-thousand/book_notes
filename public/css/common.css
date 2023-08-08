@@ -1,0 +1,139 @@
+/* 共通のスタイル */
+html {
+    font-size: 16px;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+/* h1装飾用 */
+.h1-designed {
+    padding-bottom: 20px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    background-image: linear-gradient(
+        90deg,
+        #c7c7c7 0%, #c7c7c7 45%,
+        #e5c046 45%, #e5c046 55%,
+        #c7c7c7 55%, #c7c7c7 100% 
+    );
+    background-size: 80% 6px;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+/* h2装飾用 */
+.h2-designed {
+    padding: 1em 2em 15px;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        #c7c7c7 0px,#c7c7c7 2px,
+        rgba(0 0 0 / 0) 0%, rgba(0 0 0 / 0) 50%
+    );
+    background-size: 8px 8px;
+    background-repeat: repeat-x;
+    background-position: center bottom;
+}
+
+/* h3装飾用 */
+.h3-designed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.h3-designed:before,
+.h3-designed:after {
+    content: '';
+    width: 70px;
+    height: 3px;
+    background-color: #c7c7c7;   
+}
+.h3-designed:before {
+    margin-right: 30px;
+}
+.h3-designed:after {
+    margin-left: 30px;
+}
+
+
+
+
+/* ホーム画面のスタイル */
+
+
+
+/* noteFormのスタイル */
+.input-range {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background: #8acdff;
+    height: 14px;
+    width: 100%;
+    border-radius: 10px;
+    border: solid 3px #dff1ff;
+    outline: 0;
+
+}
+
+/* noteIndexのスタイル */
+#sp-display {
+    display: none;
+
+} 
+
+.sp-display-a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.sp-display-a:hover {
+    background: #c4c4c4;
+}
+
+
+.input-range:focus {
+    box-shadow: 0 0 3px rgb(0, 161, 255);
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+    /* 共通スタイル */
+    html {
+        font-size: 15px;
+    }
+    
+    /* noteIndex.blade.phpのスタイル */
+    #sp-display {
+        display: block;
+        
+    } 
+
+    #sp-notes-index .one {
+        /* background-color: blue; */
+        
+    }
+
+    #sp-notes-index .two {
+        /* background-color: red; */
+    }
+    #sp-notes-index .three {
+        /* background-color: yellow; */
+    }
+    #sp-notes-index .four {
+        /* background-color: green; */
+    }
+
+    #pc-display {
+        display: none;
+    }
+    
+}
