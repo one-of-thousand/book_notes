@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('small_genres', function (Blueprint $table) {
+        Schema::create('planed_book_status', function (Blueprint $table) {
             $table->id();
+            $table->string('planed_book_states_name');
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('small_genres');
+        Schema::dropIfExists('planed_book_status');
     }
 };

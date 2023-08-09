@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PlanedBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,26 +40,35 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
+// ホーム画面関係
 //ホーム画面を表示
 Route::get('/note/home', [NoteController::class, 'noteHome'])->name('note.home');
 
 //読みたい本リストの登録画面を表示
-Route::get('/planedbook/create', [NoteController::class, 'planedBookCreate'])->name('planedBook.create');
+Route::get('/planedbook/create', [PlanedBookController::class, 'planedBookCreate'])->name('planedBook.create');
+//読みたい本リストの登録処理を実行
+Route::post('/planedbook/store', [PlanedBookController::class, 'planedBookStore'])->name('planedBook.store');
 
+
+
+
+// Note登録関係
+//note一覧画面を表示
+Route::get('/note/index', [NoteController::class, 'noteIndex'])->name('note.index');
 
 //Note登録画面を表示
 Route::get('/note/create', [NoteController::class, 'noteCreate'])->name('note.create');
 
-//note一覧画面を表示
-Route::get('/note/index', [NoteController::class, 'noteIndex'])->name('note.index');
 
 
+// 抜粋・シーン関係
 //抜粋一覧画面を表示
 Route::get('/sentence/index', [NoteController::class, 'sentenceIndex'])->name('sentence.index');
 
 //タグ一覧画面を表示
 Route::get('/tag/index', [NoteController::class, 'tagIndex'])->name('tag.index');
+
+
 
 //note詳細画面を表示
 Route::get('/note/detail', [NoteController::class, 'noteDetail'])->name('note.detail');

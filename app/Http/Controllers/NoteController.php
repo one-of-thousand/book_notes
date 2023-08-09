@@ -14,12 +14,7 @@ class NoteController extends Controller
         return view('app.bookNotes.home');
     }
 
-    /**
-     * 読みたい本リストの登録画面を表示
-     */
-    public function planedBookCreate() {
-        return view('app.bookNotes.planedBookForm');
-    }
+    
     
     /**
      * note登録画面を表示

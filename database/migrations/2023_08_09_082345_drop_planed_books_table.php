@@ -11,10 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sentence_tag', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        // Schema::drop('planed_books');
     }
 
     /**
@@ -22,6 +19,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sentence_tag');
+        //
     }
 };
