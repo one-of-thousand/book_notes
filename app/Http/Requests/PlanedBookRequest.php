@@ -11,7 +11,7 @@ class PlanedBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class PlanedBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'planed_book_title' => 'required',
+            'planed_book_author' =>'required'
         ];
     }
 }

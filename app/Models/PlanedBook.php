@@ -19,4 +19,10 @@ class PlanedBook extends Model
         'planed_book_importance',
         'planed_book_state'
     ];
+
+    //日付表示のフォーマット
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
 }

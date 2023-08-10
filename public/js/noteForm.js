@@ -1,14 +1,25 @@
 'use strict';
 
+    //共通処理
 
-//ホーム画面のJS処理
+//削除の確認
+function checkDelete() {
+    if(window.confirm('削除してよろしいですか')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+    //ホーム画面のJS処理
 
 
 
 
 
 
-
+    //note入力画面
 //著者入力欄の増減処理
 $(function () {
     const minCount = 1;

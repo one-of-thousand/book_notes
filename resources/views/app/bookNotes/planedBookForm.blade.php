@@ -8,7 +8,7 @@
     @csrf
         <div class="form-group mb-3">
             <label class="form-label">書名</label>
-            <input type="text" name="planed_book_title" class="form-control" placeholder="例）吾輩は猫である">
+            <input type="text" name="planed_book_title" value="{{ old('planed_book_title') }}" class="form-control" placeholder="例）吾輩は猫である">
             @if ($errors->has('planed_book_title'))
                 <div class="text-danger">
                     {{ $errors->first('planed_book_title') }}
@@ -18,7 +18,7 @@
 
         <div class="form-group mb-3">
             <label class="form-label">著者名</label>
-            <input type="text" name="planed_book_author" class="form-control" placeholder="例）夏目漱石">
+            <input type="text" name="planed_book_author" value="{{ old('planed_book_author') }}" class="form-control" placeholder="例）夏目漱石">
             @if ($errors->has('planed_book_author'))
                 <div class="text-danger">
                     {{ $errors->first('planed_book_author') }}
@@ -47,10 +47,10 @@
         </div>
         <div class="row">
             <div class="col col-6 d-grid gap-2 mx-auto">
-                <input type="submit" class="btn btn-primary btn-block" value="リストに追加">
+                <a href="{{ route('note.home') }}" class="btn btn-secondary btn-block btn-lg">キャンセル</a>
             </div>
             <div class="col col-6 d-grid gap-2 mx-auto">
-                <a href="{{ route('note.home') }}" class="btn btn-secondary btn-block">キャンセル</a>
+            <input type="submit" class="btn btn-primary btn-block btn-lg" value="リストに追加">
             </div>
         </div>
     </form>

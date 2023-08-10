@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\PlanedBook;
+use Illuminate\Pagination\Paginator;
 
 class NoteController extends Controller
 {
@@ -11,7 +13,15 @@ class NoteController extends Controller
      * ホーム画面を表示
      */
     public function noteHome() {
-        return view('app.bookNotes.home');
+        //読みたい本リストの一覧を表示
+        $planedBooks = PlanedBook::orderBy('created_at', 'desc')->paginate(5);
+        // dd($planedBooks);
+        //検索用のプルダウンリストを取得
+        $importance = config('const.planedBook.importance');
+        $state = config('const.planedBook.state');
+
+
+        return view('app.bookNotes.home', compact('planedBooks', 'importance', 'state'));
     }
 
     

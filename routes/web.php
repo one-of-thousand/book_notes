@@ -48,7 +48,8 @@ Route::get('/note/home', [NoteController::class, 'noteHome'])->name('note.home')
 Route::get('/planedbook/create', [PlanedBookController::class, 'planedBookCreate'])->name('planedBook.create');
 //読みたい本リストの登録処理を実行
 Route::post('/planedbook/store', [PlanedBookController::class, 'planedBookStore'])->name('planedBook.store');
-
+//読みたい本リストの削除処理を実行
+Route::post('/planedbook/delete/{id}', [PlanedBookController::class, 'planedBookDelete'])->name('planedBook.delete');
 
 
 
