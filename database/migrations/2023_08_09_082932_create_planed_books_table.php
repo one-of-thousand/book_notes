@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('planed_book_title');
             $table->string('planed_book_author');
-            $table->string('planed_book_importance');
-            $table->string('planed_book_state');
+            $table->foreignId('planed_book_star_id')->constrained();
+            $table->foreignId('planed_book_state_id')->constrained();
             $table->timestamps();           
         });
     }

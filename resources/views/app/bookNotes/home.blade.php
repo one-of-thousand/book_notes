@@ -20,7 +20,9 @@
 
 <div class="container p-2">
     <h2 class="text-center h2-designed">読みたい本リスト</h2>
-    <a href="{{ route('planedBook.create') }}"><div class="btn btn-primary mx-4" id="">新規追加</div></a>
+    <a href="{{ route('planedBook.create') }}">
+        <div class="btn btn-primary mx-4" id="">新規追加</div>
+    </a>
     @if (session('err_msg'))
     <p class="text-danger">
         {{ session('err_msg') }}
@@ -28,31 +30,42 @@
     @endif
 
     <!-- 追加ボタンと検索フォーム -->
-    <form method="GET" action="" class="p-1">
-        <div class="row m-3">
-            <label for="" class="form-label">単語検索</label>
-            <input type="text" placeholder="書名・著者名を入力">
-        </div>
-        <div class="row form-group m-1">
-            <div class="col col-6">
-                <label for="" class="form-label">重要度</label>
-                <select name="" id="">
-                    @foreach($importance as $key => $value)
-                    <option value="">{{ $value }}</option>
-                    @endforeach
-                </select>
+    <form method="GET" action="{{ route('planedBook.search') }}" class="p-1">
+        <div class="bg-white m-2 p-1">
+            <div class="row m-3">
+                <div class="col col-6">
+                    <label for="" class="form-label">単語検索：</label>
+                    <input type="text" name="searchWord" value="" placeholder="書名・著者名を入力">
+                </div>
+                <div class="col col-6 d-flex align-items-end">
+                    <button type="submit" class="btn btn-secondary">この条件で絞り込む！</button>
+                </div>
             </div>
-            <div class="col col-6">
-                <label for="" class="form-label">状態</label>
-                <select name="" id="">
-                    @foreach($state as $key => $value)
-                    <option value="">{{ $value }}</option>
-                    @endforeach
-                </select>
+            <div class="row form-group m-3">
+                <div class="col col-6">
+                    <label for="" class="form-label">重要度：</label>
+                    <select name="importance" id="">
+                        <option hidden></option>
+                        <option></option>
+                        @foreach($importance as $key => $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col col-6">
+                    <label for="" class="form-label">状態：</label>
+                    <select name="state" id="">
+                    <option hidden></option>
+                    <option></option>
+                        @foreach($state as $key => $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
     </form>
-    
+
 
     <!-- スマホ表示用　ここから -->
     <div id="sp-display" class="p-1">

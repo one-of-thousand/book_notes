@@ -9,7 +9,7 @@ class Planed_Book_Star extends Model
 {
     use HasFactory;
 
-    public function planed_book() {
-        return $this->hasMany('App\Models\Planed_Book');
-    }
+    // public function planed_book() {
+    //     return $this->hasMany('App\Models\Planed_Book');
+    // }
 }

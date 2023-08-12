@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::drop('planed_books');
+        Schema::drop('planed_book_stars');
     }
 
     /**

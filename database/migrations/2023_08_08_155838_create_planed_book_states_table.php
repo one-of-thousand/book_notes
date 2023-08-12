@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('planed_book_status', function (Blueprint $table) {
+        Schema::create('planed_book_states', function (Blueprint $table) {
             $table->id();
             $table->string('planed_book_states_name');
             $table->timestamps();

@@ -63,15 +63,46 @@ class PlanedBookController extends Controller
             Session::flash('err_msg', 'データがありません');
             return redirect(route('note.home'));
         }
-        //エラーなければ、削除実行
-        // try {
-            
-        // } catch(Throwable $e) {
-        //     abort(500);
-        // }
-        PlanedBook::destroy($id);
+
+        // エラーなければ、削除実行
+        try {
+            PlanedBook::destroy($id);    
+        } catch(Throwable $e) {
+            abort(500);
+        }
+        
         
         Session::flash('err_msg', '削除しました。');
         return redirect(route('note.home'));
+    }
+
+    /**
+     * 検索を実行
+     * 
+     * @return view
+     */
+    public function planedBookSearch(Request $request) {
+        $searchWord = $request->searchWord;
+        $importance = $request->importance;
+        $state = $request->state;
+        
+        // dd($searchWord, $importance, $state);
+
+        $query = PlanedBook::query();
+        //テキストボックスの単語からタイトルと著者名を検索。該当レコードを取得
+        if (isset($searchWord)) {
+            $query->where('planed_book_title', 'LIKE', "%{$searchWord}%")
+            ->orWhere('planed_book_author', 'LIKE', "%{$searchWord}%");
+        }
+
+        //
+
+
+
+        //実行結果を保存
+        $planedBooks = $query->orderBy('created_at', 'desc')->paginate(2);
+        // dd($searchResult);
+
+        return view('app.bookNotes.home', compact('planedBooks'));
     }
 }

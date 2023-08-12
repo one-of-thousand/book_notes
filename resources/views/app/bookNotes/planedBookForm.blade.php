@@ -30,6 +30,7 @@
             <div class="col">
                 <label class="form-label">重要度を選択</label>
                 <select type="text" class="form-select" name="planed_book_importance">
+                    <option hidden></option>
                     @foreach($importance as $key => $value)
                     <option value="{{ $value }}">{{ $value }}</option>
                     @endforeach
@@ -39,6 +40,7 @@
             <div class="col">
                 <label class="form-label">状態を選択</label>
                 <select type="text" class="form-select" name="planed_book_state">
+                    <option hidden></option>
                     @foreach($state as $key => $value)
                         <option value="{{ $value }}">{{ $value }}</option>
                     @endforeach
