@@ -33,18 +33,15 @@
     <form method="GET" action="{{ route('planedBook.search') }}" class="p-1">
         <div class="bg-white m-2 p-1">
             <div class="row m-3">
-                <div class="col col-6">
+                <div class="col col-auto">
                     <label for="" class="form-label">単語検索：</label>
-                    <input type="text" name="searchWord" value="" placeholder="書名・著者名を入力">
-                </div>
-                <div class="col col-6 d-flex align-items-end">
-                    <button type="submit" class="btn btn-secondary">この条件で絞り込む！</button>
+                    <input type="text" name="searchWord" value="{{ old('searchWord') }}" placeholder="書名・著者名を入力">
                 </div>
             </div>
             <div class="row form-group m-3">
                 <div class="col col-6">
                     <label for="" class="form-label">重要度：</label>
-                    <select name="importance" id="">
+                    <select name="importance">
                         <option hidden></option>
                         <option></option>
                         @foreach($importance as $key => $value)
@@ -57,10 +54,19 @@
                     <select name="state" id="">
                     <option hidden></option>
                     <option></option>
+
                         @foreach($state as $key => $value)
                         <option value="{{ $value }}">{{ $value }}</option>
                         @endforeach
                     </select>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col col-6 d-flex align-items-end">
+                    <button type="submit" class="btn btn-info">検索開始</button>
+                </div>
+                <div class="col col-6 d-flex align-items-end">
+                    <a href="{{ route('note.home') }}" class="btn btn-secondary">検索条件クリア</a>
                 </div>
             </div>
         </div>
@@ -106,7 +112,9 @@
 
     <!-- PC表示用　ここから -->
     <div id="pc-display" class="m-2">
+        
         <table class="table table-striped">
+            <p>全{{ $planedBooks->count() }}件</p>
             <thead class="table-dark">
                 <tr>
 
@@ -121,8 +129,8 @@
             <tbody>
                 @foreach($planedBooks as $planedBook)
                 <tr>
-                    <td>{{ $planedBook->created_at->format('Y/m/d') }}</a></td>
-                    <td><a>{{ $planedBook->planed_book_title }}</a></td>
+                    <td>{{ $planedBook->created_at->format('Y/m/d') }}</td>
+                    <td><a href="/planedbook/edit/{{ $planedBook->id }}">{{ $planedBook->planed_book_title }}</a></td>
                     <td>{{ $planedBook->planed_book_author }}</td>
                     <td>{{ $planedBook->planed_book_importance }}</td>
                     <td>{{ $planedBook->planed_book_state }}</td>
@@ -136,7 +144,11 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $planedBooks->links() }}
+        <!-- ページネーション -->
+        <div class="d-flex justify-content-center">
+        {{ $planedBooks->appends(request()->input())->links() }}
+        </div>
+        
     </div>
 </div>
 

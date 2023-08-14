@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\PlanedBookRequest;
 use PHPUnit\Event\Code\Throwable;
 use Illuminate\Support\Facades\DB;
+use Psy\Command\WhereamiCommand;
 
 class PlanedBookController extends Controller
 {
@@ -51,6 +52,21 @@ class PlanedBookController extends Controller
         return redirect(route('note.home'));
     }
 
+
+    /**
+     * 編集画面を表示
+     * 
+     * @return view
+     */
+    public function planedBookEdit($id) {
+        //idから該当レコードを取得
+        $editPlanedBook = PlanedBook::find($id);
+
+        return view('app.bookNotes.planedBookEdit', compact('editPlanedBook'));
+    }
+
+
+
     /**
      * 削除を実行
      * 
@@ -83,26 +99,90 @@ class PlanedBookController extends Controller
      */
     public function planedBookSearch(Request $request) {
         $searchWord = $request->searchWord;
-        $importance = $request->importance;
-        $state = $request->state;
+        $selectImportance = $request->importance;
+        $selectState = $request->state;
         
         // dd($searchWord, $importance, $state);
 
+        //まずは全件取得のクエリを生成。実行はまだ
         $query = PlanedBook::query();
-        //テキストボックスの単語からタイトルと著者名を検索。該当レコードを取得
-        if (isset($searchWord)) {
+
+        //単語と重要度と状態
+        if(isset($searchWord) && isset($selectImportance) && isset($selectState)) {
+            $query->where(function($query) use($searchWord) {
+                $query->where('planed_book_title', 'LIKE', "%{$searchWord}%")
+                        ->orwhere('planed_book_author', 'LIKE', "%{$searchWord}%");
+            });
+            $query->where(function($query) use($selectImportance) {
+                $query->where('planed_book_importance', $selectImportance);
+            });
+            $query->where(function($query) use($selectState) {
+                $query->where('planed_book_state', $selectState);
+            });
+        }
+        
+        //単語検索と重要度選択
+        if (isset($searchWord) && isset($selectImportance)) {
+            $query->where(function($query) use($searchWord) {
+                $query->where('planed_book_title', 'LIKE', "%{$searchWord}%")
+                        ->orwhere('planed_book_author', 'LIKE', "%{$searchWord}%");
+            });
+            $query->where(function($query) use($selectImportance) {
+                $query->where('planed_book_importance', $selectImportance);
+            });
+        }
+
+        //単語検索と状態選択
+        if(isset($searchWord) && isset($selectState)) {
+            $query->where(function($query) use($searchWord) {
+                $query->where('planed_book_title', 'LIKE', "%{$searchWord}%")
+                        ->orwhere('planed_book_author', 'LIKE', "%{$searchWord}%");
+            });
+            $query->where(function($query) use($selectState) {
+                $query->where('planed_book_state', $selectState);
+            });
+        }
+
+        //重要度選択と状態選択
+        if(isset($selectImportance) && isset($selectState)) {
+            $query->where(function($query) use($selectImportance) {
+                $query->where('planed_book_importance', $selectImportance);
+            });
+            $query->where(function($query) use($selectState) {
+                $query->where('planed_book_state', $selectState);
+            });
+        }
+
+        //単語検索のみ
+        if(isset($searchWord)) {
             $query->where('planed_book_title', 'LIKE', "%{$searchWord}%")
             ->orWhere('planed_book_author', 'LIKE', "%{$searchWord}%");
         }
 
-        //
+        //重要度のみ
+        if(!empty($selectImportance)){
+            $query->where('planed_book_importance', $selectImportance);
+        }
 
-
-
+        //状態のみ
+        if(!empty($selectState)){
+            $query->where('planed_book_state', $selectState);
+        }
+        
         //実行結果を保存
-        $planedBooks = $query->orderBy('created_at', 'desc')->paginate(2);
-        // dd($searchResult);
+        $planedBooks = $query->orderBy('created_at', 'desc')->paginate(5);
+        // dd($planedBooks);
 
-        return view('app.bookNotes.home', compact('planedBooks'));
+        //検索用のプルダウンリストを取得
+        $importance = config('const.planedBook.importance');
+        $state = config('const.planedBook.state');
+
+        return view('app.bookNotes.home', compact('planedBooks', 'importance', 'state'));
+    }
+
+    //「\\」「%」「_」などの記号を文字としてエスケープさせる
+    public static function escapeLike($str)
+    {
+        return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
     }
 }

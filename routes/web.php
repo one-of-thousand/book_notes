@@ -44,13 +44,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //ホーム画面を表示
 Route::get('/note/home', [NoteController::class, 'noteHome'])->name('note.home');
 
-//読みたい本リストの登録画面を表示
+//読みたい本リストについて
+//登録画面を表示
 Route::get('/planedbook/create', [PlanedBookController::class, 'planedBookCreate'])->name('planedBook.create');
-//読みたい本リストの登録処理を実行
+//登録処理を実行
 Route::post('/planedbook/store', [PlanedBookController::class, 'planedBookStore'])->name('planedBook.store');
-//読みたい本リストの削除処理を実行
+//編集画面を表示
+Route::get('/planedbook/edit/{id}', [PlanedBookController::class, 'planedBookEdit'])->name('planedBook.edit');
+//編集内容を更新
+Route::post('/planedbook/update', [PlanedBookController::class, 'planedBookUpdate'])->name('planedBook.update');
+//削除処理を実行
 Route::post('/planedbook/delete/{id}', [PlanedBookController::class, 'planedBookDelete'])->name('planedBook.delete');
-//読みたい本リストの検索実行
+//検索実行
 Route::get('/planedbook/search', [PlanedBookController::class, 'planedBookSearch'])->name('planedBook.search');
 
 

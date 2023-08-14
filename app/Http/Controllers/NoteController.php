@@ -13,6 +13,8 @@ class NoteController extends Controller
      * ホーム画面を表示
      */
     public function noteHome() {
+        
+        
         //読みたい本リストの一覧を表示
         $planedBooks = PlanedBook::orderBy('created_at', 'desc')->paginate(5);
         // dd($planedBooks);
