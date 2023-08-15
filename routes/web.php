@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PlanedBookController;
+use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +39,11 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//ログアウト
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // ホーム画面関係
 //ホーム画面を表示

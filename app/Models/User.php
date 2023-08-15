@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //リレーション定義
+    public function planedBooks() {
+        return $this->hasMany(PlanedBook::class);
+    }
 }

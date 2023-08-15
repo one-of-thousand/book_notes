@@ -35,6 +35,7 @@ class PlanedBookController extends Controller
     public function planedBookStore(PlanedBookRequest $request) {
         //フォームの入力内容を取得
         $inputs = $request->all();
+        // dd($inputs);
 
         //トランザクション処理の開始
         DB::beginTransaction();
@@ -56,13 +57,60 @@ class PlanedBookController extends Controller
     /**
      * 編集画面を表示
      * 
+     * @param int $id
      * @return view
      */
     public function planedBookEdit($id) {
         //idから該当レコードを取得
-        $editPlanedBook = PlanedBook::find($id);
+        $planedBook = PlanedBook::find($id);
 
-        return view('app.bookNotes.planedBookEdit', compact('editPlanedBook'));
+        // dd($planedBook);
+        if (is_null($planedBook)) {
+            Session::flash('err_msg', 'データがありません');
+            return redirect(route('note.home'));
+        }
+
+        //重要度と状態のselect要素の値をconfigから取得
+        $importance = config('const.planedBook.importance');
+        $state = config('const.planedBook.state');
+
+        return view('app.bookNotes.planedBookEdit', compact('planedBook', 'importance', 'state'));
+    }
+
+
+    /**
+     * 更新処理の実行
+     * 
+     * @param int $id
+     * @return view
+     */
+    public function planedBookUpdate(PlanedBookRequest $request) {
+        //フォームの入力内容を取得
+        $inputs = $request->all();
+        // dd($inputs);
+
+        //トランザクション処理の開始
+        DB::beginTransaction();
+        try {
+            //登録処理を実行
+            $planedBook = PlanedBook::find($inputs['id']);
+
+            $planedBook->fill([
+                'planed_book_title' => $inputs['planed_book_title'],
+                'planed_book_author' => $inputs['planed_book_author'],
+                'planed_book_importance' => $inputs['planed_book_importance'],
+                'planed_book_state' => $inputs['planed_book_state'],
+            ]);
+            $planedBook->save();
+            DB::commit();
+        } catch(Throwable $e) {
+            abort(500);
+        }
+
+        //セッションに登録完了メッセージを保存
+        Session::flash('err_msg',  'リストを更新しました！');
+
+        return redirect(route('note.home'));
     }
 
 

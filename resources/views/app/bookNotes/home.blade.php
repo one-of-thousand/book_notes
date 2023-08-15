@@ -2,8 +2,12 @@
 
 @section('content')
 <!-- 共通 -->
+
 <div id="reading-data" class="container">
     <h2 class="text-center h2-designed">これまでの読書データ</h2>
+    <div class="mb-2 center-block">
+        <div><button class="btn btn-primary w-50" onclick="location.href='/note/create'">新たにNoteを書く</button></div>
+    </div>
     <table class="table table-bordered">
         <tr>
             <th class="col-4">Note総登録数</th>
@@ -29,9 +33,15 @@
     </p>
     @endif
 
+    @if ($planedBooks->count() === 0)
+        <p class="text-center">リストはまだ登録されていません。<br>
+        新規追加ボタンから気になっている本を登録しましょう！</p>
+    @endif
+   
+    @if ($planedBooks->count() !== 0)
     <!-- 追加ボタンと検索フォーム -->
     <form method="GET" action="{{ route('planedBook.search') }}" class="p-1">
-        <div class="bg-white m-2 p-1">
+        <div class="bg-light m-2 p-1">
             <div class="row m-3">
                 <div class="col col-auto">
                     <label for="" class="form-label">単語検索：</label>
@@ -61,13 +71,9 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
-            <div class="col col-6 d-flex align-items-end">
-                    <button type="submit" class="btn btn-info">検索開始</button>
-                </div>
-                <div class="col col-6 d-flex align-items-end">
-                    <a href="{{ route('note.home') }}" class="btn btn-secondary">検索条件クリア</a>
-                </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-info">検索開始</button>
+                <button onclick="location.href='/note/home'" class="btn btn-secondary">検索条件クリア</button>
             </div>
         </div>
     </form>
@@ -79,7 +85,7 @@
         <div class="card sp-note-index-a p-2 m-1">
             <div class="row">
                 <div class="col col-5 one fs-5 fw-bold">
-                    <a href="">{{ $planedBook->planed_book_title }}</a>
+                    <a href="/planedbook/edit/{{ $planedBook->id }}">{{ $planedBook->planed_book_title }}</a>
                 </div>
                 <div class="col col-3.5 two fs-6">
                     {{ $planedBook->planed_book_importance }}
@@ -114,7 +120,7 @@
     <div id="pc-display" class="m-2">
         
         <table class="table table-striped">
-            <p>全{{ $planedBooks->count() }}件</p>
+            <!-- <p>全{{ $planedBooks->count() }}件</p> -->
             <thead class="table-dark">
                 <tr>
 
@@ -151,7 +157,7 @@
         
     </div>
 </div>
-
+@endif
 <!-- PC表示用　ここまで -->
 
 <!-- 読書データ表示 -->

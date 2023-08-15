@@ -18,7 +18,8 @@ class PlanedBook extends Model
         'planed_book_title',
         'planed_book_author',
         'planed_book_importance',
-        'planed_book_state'
+        'planed_book_state',
+        'user_id'
     ];
 
     //日付表示のフォーマット
@@ -33,5 +34,9 @@ class PlanedBook extends Model
     }
     public function planedBookState(): BelongsTo{
         return $this->belongsTo(Planed_Book_State::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }
