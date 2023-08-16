@@ -6,6 +6,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PlanedBookController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BookNotesHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // ホーム画面関係
 //ホーム画面を表示
-Route::get('/note/home', [NoteController::class, 'noteHome'])->name('note.home');
+Route::get('/booknotes/home', [BookNotesHomeController::class, 'noteHome'])->name('note.home');
 
 //読みたい本リストについて
 //登録画面を表示

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('sentences', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('note_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->integer('sentence_page');
+            $table->string('sentence_body');
+            $table->string('sentence_memo');
             $table->timestamps();
         });
     }

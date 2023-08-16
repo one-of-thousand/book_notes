@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('sentence_tag', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tag_id')->constrained();
+            $table->foreignId('sentence_id')->constrained();
             $table->timestamps();
         });
     }

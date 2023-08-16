@@ -29,13 +29,6 @@ class PlanedBook extends Model
     ];
 
     //リレーション
-    public function planedBookStar(): BelongsTo{
-        return $this->belongsTo(Planed_Book_Star::class);
-    }
-    public function planedBookState(): BelongsTo{
-        return $this->belongsTo(Planed_Book_State::class);
-    }
-
     public function user() {
         return $this->belongsTo(User::class);
     }

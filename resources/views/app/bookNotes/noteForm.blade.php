@@ -12,7 +12,7 @@
         <div class="">
             <div class="form-group mb-3">
                 <label class="form-label">書名</label>
-                <input type="text" name="title" class="form-control" placeholder="例）吾輩は猫である">
+                <input type="text" name="note_title" class="form-control" placeholder="例）吾輩は猫である">
             </div>
 
             <label class="form-label">著者</label>

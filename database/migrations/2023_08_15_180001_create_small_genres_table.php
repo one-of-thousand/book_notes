@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('small_genres', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('big_genre_id')->constrained();
+            $table->string('small_genre_name');
             $table->timestamps();
         });
     }

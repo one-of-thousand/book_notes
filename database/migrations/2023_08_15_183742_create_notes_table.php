@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('note_title');
+            $table->date('note_start_reading');
+            $table->date('note_end_reading');
+            $table->string('note_memo');
+            $table->string('note_publisher');
+            $table->foreignId('big_genre_id')->constrained();
+            $table->foreignId('small_genre_id')->constrained();
+            $table->integer('note_score');
+            $table->string('note_outline');
+            $table->string('note_impression');
             $table->timestamps();
         });
     }

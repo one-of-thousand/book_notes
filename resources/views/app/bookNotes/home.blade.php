@@ -33,14 +33,15 @@
     </p>
     @endif
 
-    @if ($planedBooks->count() === 0)
+    <!-- @if ($planedBooks->count() === 0)
         <p class="text-center">リストはまだ登録されていません。<br>
         新規追加ボタンから気になっている本を登録しましょう！</p>
-    @endif
-   
-    @if ($planedBooks->count() !== 0)
+    @endif -->
+
+    
+
     <!-- 追加ボタンと検索フォーム -->
-    <form method="GET" action="{{ route('planedBook.search') }}" class="p-1">
+    <form method="GET" action="{{ route('note.home') }}" class="p-1">
         <div class="bg-light m-2 p-1">
             <div class="row m-3">
                 <div class="col col-auto">
@@ -73,7 +74,7 @@
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-info">検索開始</button>
-                <button onclick="location.href='/note/home'" class="btn btn-secondary">検索条件クリア</button>
+                <button onclick="location.href='/booknotes/home'" class="btn btn-secondary">検索条件クリア</button>
             </div>
         </div>
     </form>
@@ -81,6 +82,7 @@
 
     <!-- スマホ表示用　ここから -->
     <div id="sp-display" class="p-1">
+    <p>全{{ $planedBooksCount->count() }}件</p>
         @foreach($planedBooks as $planedBook)
         <div class="card sp-note-index-a p-2 m-1">
             <div class="row">
@@ -113,6 +115,10 @@
         </div>
         @endforeach
 
+        <!-- ページネーション -->
+        <div class="d-flex justify-content-center">
+        {{ $planedBooks->appends(request()->input())->links() }}
+        </div>
     </div>
     <!-- スマホ表示用　ここまで -->
 
@@ -120,7 +126,7 @@
     <div id="pc-display" class="m-2">
         
         <table class="table table-striped">
-            <!-- <p>全{{ $planedBooks->count() }}件</p> -->
+            <p>全{{ $planedBooksCount->count() }}件</p>
             <thead class="table-dark">
                 <tr>
 
@@ -157,7 +163,7 @@
         
     </div>
 </div>
-@endif
+
 <!-- PC表示用　ここまで -->
 
 <!-- 読書データ表示 -->
