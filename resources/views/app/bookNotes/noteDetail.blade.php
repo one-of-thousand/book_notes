@@ -4,10 +4,10 @@
 <div class="container border-bottom border-3 p-3">
     <div class="row">
         <div class="col col-9">
-            <div class="title fs-2">『幽霊』</div>
+            <div class="title fs-2">『{{ $note->note_title }}』</div>
         </div>
         <div class="col col-3">
-            <div class="favorite fs-3">97点</div>
+            <div class="favorite fs-3">{{ $note->note_score }}点</div>
         </div>
     </div>
     <div class="row">
@@ -49,12 +49,12 @@
                     <th scope="col" class="col col-2">Note更新日</th>
                 </tr>
                 <tr>
-                    <td class="col col-2">新潮社</td>
+                    <td class="col col-2">{{ $note->note_publisher }}</td>
                     <td class="col col-2">小説―文学</td>
-                    <td class="col col-2">2023/7/1</td>
-                    <td class="col col-2">2023/7/5</td>
-                    <td class="col col-2">2023/7/10</td>
-                    <td class="col col-2">2023/7/10</td>
+                    <td class="col col-2">{{ $note->note_start_reading }}</td>
+                    <td class="col col-2">{{ $note->note_end_reading }}</td>
+                    <td class="col col-2">{{ $note->created_at }}</td>
+                    <td class="col col-2">{{ $note->updated_at }}</td>
                 </tr>
             </thead>
         </table>
@@ -65,7 +65,7 @@
         <table class="table">
             <tr>
                 <th>出版社</th>
-                <td>新潮社</td>
+                <td>{{ $note->note_publisher }}</td>
             </tr>
             <tr>
                 <th>分類</th>
@@ -73,19 +73,19 @@
             </tr>
             <tr>
                 <th>読書開始日</th>
-                <td>2023/7/1</td>
+                <td>{{ $note->note_start_reading }}</td>
             </tr>
             <tr>
                 <th>読了日</th>
-                <td>2023/7/5</td>
+                <td>{{ $note->note_end_reading }}</td>
             </tr>
             <tr>
                 <th>Note作成日</th>
-                <td>2023/7/10</td>
+                <td>{{ $note->created_at }}</td>
             </tr>
             <tr>
                 <th>Note更新日</th>
-                <td>2023/7/10</td>
+                <td>{{ $note->updated_at }}</td>
             </tr>
         </table>
     </div>
@@ -96,30 +96,31 @@
         <div class="card m-1">
             <div class="card-body">
                 <div class="card-title fw-bold">概要・あらすじ</div>
-                <p class="card-text">「人はなぜ追憶を語るのだろうか。どの民族にも神話があるように、どの個人にも心の神話があるものだ」昆虫採集に興ずる少年の心をふとよぎる幼い日に去った母親のイメージ、美しい少女に寄せる思慕…過去の希望と不安が、敗戦前後の高校生の胸に甦る。過去を見つめ、隠された幼児期の記憶を求めて深層意識の中に溯っていく。これは「心の神話」であり、魂のフィクションである。</p>
+                <p class="card-text">{{ $note->note_outline }}</p>
             </div>
         </div>
         <div class="card m-1">
             <div class="card-body">
                 <div class="card-title fw-bold">感想</div>
-                <p class="card-text">ダミーテキスト。ダミーテキスト。ダミーテキスト。ダミーテキスト。</p>
+                <p class="card-text">{{ $note->note_impression }}</p>
             </div>
         </div>
         <div class="card m-1">
             <div class="card-body fw-bold">
                 <div class="card-title">メモ</div>
-                <p class="card-title"></p>
+                <p class="card-title">{{ $note->note_memo }}</p>
             </div>
         </div>
     </div>
 
     <div class="container">
         <h2 class="text-center m-3 h3-designed">抜粋・シーン</h2>
+        @foreach($sentences as $sentence)
         <div class="card m-1">
             <div class="card-body">
                 <div class="row m-2">
-                    <div class="col col-3 fw-bold">p16</div>
-                    <div class="col col-3 fw-bold">冒頭文</div>
+                    <div class="col col-3 fw-bold">{{ $sentence->sentence_page }}</div>
+                    <div class="col col-3 fw-bold">{{ $sentence->pluck('') }}</div>
                     <div class="col col-3 fw-bold">文章技法</div>
                     <div class="col col-3 fw-bold"></div>
                 </div>
@@ -133,6 +134,7 @@
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </div>
 

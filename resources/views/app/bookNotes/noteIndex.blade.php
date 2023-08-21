@@ -15,54 +15,41 @@
 
 <!-- スマホ表示用 -->
 <div class="container" id="sp-display">
-    <a href="" div class="card sp-display-a m-1 p-2">
+<p>全{{ $notesCount->count() }}件</p>
+    
+        @foreach($notes as $note)
+        <a href="/note/detail/{{ $note->id }}" class="card sp-display-a m-1 p-2">
         <div class="row">
-            <div class="col col-11 fs-4">
-                アヒルと鴨のコインロッカー
+            <div class="col col-12 fs-4">
+                {{ $note->note_title }}
             </div>
-            <div class="col col-1">
-                ★
-            </div>
+            
         </div>
         <div class="row">
             <div class="col col-6 three">
                 伊坂幸太郎
             </div>
             <div class="col col-2 four">
-                85点
+                {{ $note->note_score }}
             </div>
             <div class="col col-4">
-                登録：2023/07/30
+                登録：{{ $note->created_at->format('Y/m/d') }}
             </div>
         </div>
-    </a>
-    <a href="" div class="card sp-display-a m-1 p-2">
-        <div class="row">
-            <div class="col col-11 fs-4">
-                幽霊
-            </div>
-            <div class="col col-1">
-                ★
-            </div>
+        </a>
+        @endforeach
+    
+    <!-- ページネーション -->
+    <div class="d-flex justify-content-center">
+        {{ $notes->appends(request()->input())->links() }}
         </div>
-        <div class="row">
-            <div class="col col-6 three">
-                北杜夫
-            </div>
-            <div class="col col-2 four">
-                95点
-            </div>
-            <div class="col col-4">
-                登録：2023/07/25
-            </div>
-        </div>
-    </a>
 </div>
 
 
 <!-- パソコン表示用 -->
 <div class="container" id="pc-display">
     <table class="table table-striped">
+    <p>全{{ $notesCount->count() }}件</p>
         <thead class="table-dark">
             <tr>
 
@@ -75,13 +62,12 @@
             </tr>
         </thead>
         <tbody>
-
+        @foreach($notes as $note)
             <tr>
-                <!-- todo -->
-                <td><a href="">アヒルと鴨のコインロッカー</a></td>
+                <td><a href="/note/detail/{{ $note->id }}">{{ $note->note_title }}</a></td>
                 <td>伊坂幸太郎</td>
-                <td>23/07/19</td>
-                <td>88点</td>
+                <td>{{ $note->created_at->format('Y/m/d') }}</td>
+                <td>{{ $note->note_score }}</td>
                 <td>
                     <a href="#" class="btn btn-outline-primary btn-sm">↗</a>
                 </td>
@@ -94,7 +80,12 @@
                     </form>
                 </td>
             </tr>
+        @endforeach
         </tbody>
     </table>
+    <!-- ページネーション -->
+    <div class="d-flex justify-content-center">
+        {{ $notes->appends(request()->input())->links() }}
+        </div>
 </div>
 @endsection

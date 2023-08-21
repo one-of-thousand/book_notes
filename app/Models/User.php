@@ -47,4 +47,12 @@ class User extends Authenticatable
     public function planedBooks() {
         return $this->hasMany(PlanedBook::class);
     }
+
+    public function notes() {
+        return $this->hasMany(Note::class);
+    }
+
+    public function sentences() {
+        return $this->hasMany(Sentence::class);
+    }
 }

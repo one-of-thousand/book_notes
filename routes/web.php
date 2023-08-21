@@ -68,9 +68,15 @@ Route::get('/planedbook/search', [PlanedBookController::class, 'planedBookSearch
 // Note登録関係
 //note一覧画面を表示
 Route::get('/note/index', [NoteController::class, 'noteIndex'])->name('note.index');
-
 //Note登録画面を表示
 Route::get('/note/create', [NoteController::class, 'noteCreate'])->name('note.create');
+//Note登録処理を実行
+Route::get('/note/store', [NoteController::class, 'noteStore'])->name('note.store');
+//note詳細画面を表示
+Route::get('/note/detail/{id}', [NoteController::class, 'noteDetail'])->name('note.detail');
+//小ジャンルを表示
+Route::post('/note/genre', [NoteController::class, 'noteSmallGenreSelect'])->name('note.genreSelect');
+
 
 
 
@@ -83,5 +89,3 @@ Route::get('/tag/index', [NoteController::class, 'tagIndex'])->name('tag.index')
 
 
 
-//note詳細画面を表示
-Route::get('/note/detail', [NoteController::class, 'noteDetail'])->name('note.detail');

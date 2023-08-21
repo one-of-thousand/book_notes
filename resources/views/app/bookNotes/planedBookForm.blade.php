@@ -6,7 +6,9 @@
 
     <form method="POST" action="{{ route('planedBook.store') }}">
     @csrf
+        <!-- ログイン中のユーザーidをコントローラーに渡す -->
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+        
         <div class="form-group mb-3">
             <label class="form-label">書名</label>
             <input type="text" name="planed_book_title" value="{{ old('planed_book_title') }}" class="form-control" placeholder="例）吾輩は猫である">

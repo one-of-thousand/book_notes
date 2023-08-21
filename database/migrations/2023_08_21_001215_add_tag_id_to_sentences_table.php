@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('notes', function(Blueprint $table) {
-            $table->dropColumn([
-                'big_genre_id',
-                'small_genre_id'
-            ]);
+        Schema::table('sentences', function (Blueprint $table) {
+            $table->foreignId('tag_id')->nullable()->constrained();
         });
-        
     }
 
     /**
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('sentences', function (Blueprint $table) {
+            $table->dropColumn('tag_id');
+        });
     }
 };

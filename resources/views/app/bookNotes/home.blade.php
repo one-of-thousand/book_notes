@@ -171,13 +171,5 @@
     <h2 class="h2-designed text-center">読書データ一覧</h2>
 </div>
 
-<script>
-    function checkDelete() {
-        if (window.confirm('削除してよろしいですか')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
+
 @endsection
