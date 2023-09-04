@@ -18,6 +18,13 @@ class BookNotesHomeController extends Controller
      * ホーム画面を表示。同時に検索も。
      */
     public function noteHome(Request $request) {
+        // note登録データなど
+        $noteNum = Auth::user()->notes()->count();
+        $sentenceNum = Auth::user()->sentences()->count();
+        // dd($sentenceNum);
+        
+
+
         //検索ボックスから値を取得
         $searchWord = $request->searchWord;
         $selectImportance = $request->importance;
@@ -48,14 +55,20 @@ class BookNotesHomeController extends Controller
         $planedBooksCount = $query->get();
 
         //クエリを実行しページネーションしたレコードを取り出す
-        $planedBooks = $query->orderBy('created_at', 'desc')->paginate(5);
+        $planedBooks = $query->orderBy('created_at', 'desc')->paginate(10);
 
         
         //検索用のプルダウンリストを定数から取得
         $importance = config('const.planedBook.importance');
         $state = config('const.planedBook.state');
 
-        return view('app.bookNotes.home', compact('planedBooks', 'planedBooksCount', 'importance', 'state'));
+        return view('app.bookNotes.home', compact(
+            'planedBooks', 
+            'planedBooksCount', 
+            'importance', 
+            'state',
+            'noteNum',
+            'sentenceNum'));
 
         
     }

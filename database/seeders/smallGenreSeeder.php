@@ -257,5 +257,9 @@ class smallGenreSeeder extends Seeder
             'big_genre_id' => '6',
             'small_genre_name' => 'その他',
         ]);
+        SmallGenre::create([
+            'big_genre_id' => '7',
+            'small_genre_name' => '未選択',
+        ]);
     }
 }

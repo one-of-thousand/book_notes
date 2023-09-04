@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('sentences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('note_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->integer('sentence_page');
-            $table->string('sentence_body');
-            $table->string('sentence_memo');
+            $table->foreignId('note_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->integer('sentence_page')->nullable();
+            $table->text('sentence_body');
+            $table->text('sentence_memo')->nullable();
+            $table->foreignId('tag_id')->constrained();
             $table->timestamps();
         });
     }

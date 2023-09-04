@@ -7,6 +7,8 @@ use App\Http\Controllers\PlanedBookController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BookNotesHomeController;
+use App\Http\Controllers\SentenceController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,21 +73,32 @@ Route::get('/note/index', [NoteController::class, 'noteIndex'])->name('note.inde
 //Note登録画面を表示
 Route::get('/note/create', [NoteController::class, 'noteCreate'])->name('note.create');
 //Note登録処理を実行
-Route::get('/note/store', [NoteController::class, 'noteStore'])->name('note.store');
+Route::post('/note/store', [NoteController::class, 'noteStore'])->name('note.store');
 //note詳細画面を表示
 Route::get('/note/detail/{id}', [NoteController::class, 'noteDetail'])->name('note.detail');
 //小ジャンルを表示
 Route::post('/note/genre', [NoteController::class, 'noteSmallGenreSelect'])->name('note.genreSelect');
-
-
+//note編集画面を表示
+Route::get('/note/edit/{id}', [NoteController::class, 'noteEdit'])->name('note.edit');
+//Note更新処理を実行
+Route::post('/note/update', [NoteController::class, 'noteUpdate'])->name('note.update');
+//Noteを削除
+Route::post('/note/delete/{$id}', [NoteController::class, 'noteDelete'])->name('note.delete');
 
 
 // 抜粋・シーン関係
 //抜粋一覧画面を表示
-Route::get('/sentence/index', [NoteController::class, 'sentenceIndex'])->name('sentence.index');
+Route::get('/sentence/index', [SentenceController::class, 'sentenceIndex'])->name('sentence.index');
+//抜粋詳細画面を表示
+Route::get('/sentence/detail/{id}', [SentenceController::class, 'sentenceDetail'])->name('sentence.detail');
+//抜粋変更内容を更新
+Route::post('/sentence/update', [SentenceController::class, 'sentenceUpdate'])->name('sentence.update');
+//抜粋詳細画面を表示
+Route::get('/sentence/edit/{id}', [SentenceController::class, 'sentenceEdit'])->name('sentence.edit');
+//抜粋を削除
+Route::post('/sentence/delete/{id}', [SentenceController::class, 'sentenceDelete'])->name('sentence.delete');
 
+
+//タグ関係
 //タグ一覧画面を表示
-Route::get('/tag/index', [NoteController::class, 'tagIndex'])->name('tag.index');
-
-
-
+Route::get('/tag/index', [TagController::class, 'tagIndex'])->name('tag.index');

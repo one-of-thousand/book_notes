@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class SmallGenre extends Model
 {
     use HasFactory;
+
+    public function note() {
+        return $this->hasOne(Note::class);
+    }
 }

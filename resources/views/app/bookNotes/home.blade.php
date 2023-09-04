@@ -6,17 +6,17 @@
 <div id="reading-data" class="container">
     <h2 class="text-center h2-designed">これまでの読書データ</h2>
     <div class="mb-2 center-block">
-        <div><button class="btn btn-primary w-50" onclick="location.href='/note/create'">新たにNoteを書く</button></div>
+        <div class="text-center"><button class="btn btn-primary w-50" onclick="location.href='/note/create'">新たにNoteを書く</button></div>
     </div>
     <table class="table table-bordered">
         <tr>
-            <th class="col-4">Note総登録数</th>
-            <th class="col-4">抜粋総登録数</th>
+            <th class="col-4">Note総数</th>
+            <th class="col-4">抜粋文総数</th>
             <th class="col-4">6月のNote登録数</th>
         </tr>
         <tr>
-            <td class="col-4">100件</td>
-            <td class="col-4">200文</td>
+            <td class="col-4">{{ $noteNum }}件</td>
+            <td class="col-4">{{ $sentenceNum }}文</td>
             <td class="col-4">10件</td>
         </tr>
     </table>
@@ -104,12 +104,11 @@
                     {{ $planedBook->planed_book_state }}
                 </div>
                 <div class="col col-2 five">
-                    <form action="" method="post">
-                        <input type="submit" name="delete" class="btn btn-outline-danger btn-sm" value="削除">
-
-                        <!-- <input type="hidden" th:value="${book.id}" name="id">
-                    <input type="hidden" th:value="${book.version}" name="version"> -->
+                    <form action="{{ route('planedBook.delete', $planedBook->id) }}" onSubmit="return checkDelete()" method="POST">
+                        @csrf
+                            <button type="submit" name="delete" class="btn btn-outline-danger btn-sm">削除</button>
                     </form>
+                    
                 </div>
             </div>
         </div>

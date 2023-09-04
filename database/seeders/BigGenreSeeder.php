@@ -31,5 +31,8 @@ class BigGenreSeeder extends Seeder
         BigGenre::create([
             'big_genre_name' => '趣味・実用',
         ]);
+        BigGenre::create([
+            'big_genre_name' => '未選択'
+        ]);
     }
 }

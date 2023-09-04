@@ -22,15 +22,14 @@
 <div class="container">
     <table class="table">
         <tr class="table-primary">
-            <th class="col-1">No.</th>
-            <th class="col-5">タグ名</th>
+            <th class="col-6">タグ名</th>
             <th class="col-2 text-center">付与数</th>
-            <th class="col-1.5">編集</th>
-            <th class="col-1.5">削除</th>
+            <th class="col-2">編集</th>
+            <th class="col-2">削除</th>
         </tr>
+        @foreach($tags as $tag)
         <tr>
-            <td>1</td>
-            <td>冒頭文</td>
+            <td>{{ $tag->tag_name }}</td>
             <td class="text-center">2</td>
             <td><a href="#" class="btn btn-outline-primary btn-sm">↗</a></td>
             <td>
@@ -42,6 +41,7 @@
                 </form>
             </td>
         </tr>
+        @endforeach
     </table>
 </div>
 

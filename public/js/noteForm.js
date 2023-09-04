@@ -29,10 +29,13 @@ $(function () {
         if (inputCount < maxCount) {
             //要素のクローンを追加
             let element = $('#author-area .unit:last-child').clone(true);
-            let inputList = element[0].querySelectorAll('input[type="text"]');
-            for (let i = 0; i < inputList.length; i++) {
-                inputList[i].value = "";
-            }
+            let inputListText = element[0].querySelector('input[type="text"]');
+            let inputListHidden = element[0].querySelector('input[type="hidden"]');
+
+            //valueをnullにする
+            inputListText.value = "";
+            inputListHidden.value = "";
+            
             $('#author-area .unit').parent().append(element);
         }
     });
@@ -47,16 +50,19 @@ $(function () {
 //抜粋文フォームの追加・削除処
 $(function () {
     $('#sentence-add').on('click', function () {
-        let inputCount = $('#sentence-area .unit').length;
-        //要素のクローンを追加
+
+        //要素(ひとつ前のフォーム)のクローンをする
         let element = $('#sentence-area .unit:last-child').clone(true);
 
-        let inputList = element[0].querySelectorAll('input[type="text"], textarea, select');
+        let inputList = element[0].querySelectorAll('input[type="text"], input[type="hidden"], textarea, select');
+
         for (let i = 0; i < inputList.length; i++) {
             inputList[i].value = "";
         }
-        $('#sentence-area .unit').parent().append(element);
+       // 新しいフォームのタグには一番最初のoptionをセット
+        element.find('select').prop('selectedIndex',0)
 
+        $('#sentence-area .unit').parent().append(element);
 
         //最下部にスクロール
         let elm = document.documentElement;

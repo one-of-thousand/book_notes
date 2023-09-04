@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('planed_books', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('planed_book_title');
-            $table->string('planed_book_author');
-            $table->string('planed_book_importance');
-            $table->string('planed_book_state');
+            $table->string('planed_book_author')->nullable();
+            $table->string('planed_book_importance')->nullable();
+            $table->string('planed_book_state')->nullable();
             $table->timestamps();           
         });
     }

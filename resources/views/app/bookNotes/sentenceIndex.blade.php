@@ -12,77 +12,100 @@
     <div class="text-center">
         <a href="{{ route('tag.index') }}">タグを編集する</a>
     </div>
+    @if (session('err_msg'))
+    <p class="text-danger">
+        {{ session('err_msg') }}
+    </p>
+    @endif
 </div>
+
 
 <!-- スマホ用の一覧テーブル -->
 <div class="container" id="sp-display">
-    <a href="" div class="card sp-display-a m-1 p-2">
+<p>全 {{ $sentenceCount->count() }} 件</p>
+    @foreach($sentences as $sentence)
+    <div class="card sp-display-a m-1 p-2">
+    
         <div class="row">
-
-            <div class="col col-6 one fs-5 fw-bold">
-                アヒルと鴨のコインロッカー
+            <div class="col col-7 one fs-5 fw-bold">
+                <a href="/note/detail/{{ $sentence->note_id }}">
+                    {{ $sentence->note->note_title }}
+                </a>
             </div>
             <div class="col col-5 two fs-6">
-                冒頭文、比喩表現、格言
+                【{{ $sentence->tag->tag_name }}】
             </div>
-            <div class="col col-1">
-                ★
-            </div>
+            
 
         </div>
         <div class="row">
             <div class="col col-12">
-                ダミーテキスト。ダミーテキスト。ダミーテキスト。ダミーテキスト。
+                <a href="/sentence/detail/{{ $sentence->id }}" style="text-decoration: none; color: inherit;">
+                    {!! nl2br(htmlspecialchars($sentence->sentence_body)) !!}
+                </a>
             </div>
         </div>
-    </a>
-    <a href="" div class="card sp-display-a m-1 p-2">
-        <div class="row">
-
-            <div class="col col-6 one fs-5 fw-bold">
-                幽霊
-            </div>
-            <div class="col col-5 two fs-6">
-                冒頭文、比喩表現、格言
-            </div>
-            <div class="col col-1">
-                ★
-            </div>
-
+        <div class="border mt-4 ms-4 me-4 p-2">
+            @if(isset($sentence->sentence_memo))
+            メモ：{{ $sentence->sentence_memo }}
+            @else
+            メモ：なし
+            @endif
         </div>
-        <div class="row">
-            <div class="col col-12">
-                ダミーテキスト。ダミーテキスト。ダミーテキスト。ダミーテキスト。
-            </div>
+    
+    </div>
+    @endforeach
+    <!-- ページネーション -->
+    <div class="d-flex justify-content-center">
+        {{ $sentences->appends(request()->input())->links() }}
         </div>
-    </a>
 </div>
 
 
 <!-- パソコン用の一覧テーブル -->
 <div class="container" id="pc-display">
+    <p>全 {{ $sentenceCount->count() }} 件</p>
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
-                <th class="col-0.5"></th>
-                <th class="col-3">書名</th>
-                <th class="col-5">内容</th>
-                <th class="col-2.5">タグ</th>
-                <th class="col-1">編集</th>
+                <th class="col col-2">書名</th>
+                <th class="col col-6">内容</th>
+                <th class="col col-1">タグ</th>
+                <th class="col col-2">メモ</th>
+                <th class="col col-1">編集</th>
             </tr>
         </thead>
         <tbody>
+        @foreach($sentences as $sentence)
+        
             <tr>
-                <!-- todo -->
-                <td>★</td>
-                <td><a href="">アヒルと鴨のコインロッカー</a></td>
-                <td>ダミーテキスト。ダミーテキスト。ダミーテキスト。ダミーテキスト。</td>
-                <td>冒頭文、比喩表現、表現技法</td>
+            
+                <td><a href="/note/detail/{{ $sentence->note_id }}">{{ $sentence->note->note_title }}</a></td>
                 <td>
-                    <a href="#" class="btn btn-outline-primary btn-sm">↗</a>
+                    <a href="/sentence/detail/{{ $sentence->id }}" class="m-1 p-2 sp-display-a">
+                        <!-- {!! Str::limit(nl2br(htmlspecialchars($sentence->sentence_body)), 100, '...') !!} -->
+                        {!! nl2br(htmlspecialchars($sentence->sentence_body)) !!}
+                    </a>
+                </td>
+                <td>{{ $sentence->tag->tag_name }}</td>
+                <td>
+                @if(isset($sentence->sentence_memo))
+                    {{ $sentence->sentence_memo }}
+                @else
+                    なし
+                @endif
+                </td>
+                <td>
+                <a href="/sentence/edit/{{ $sentence->id }}" class="btn btn-outline-primary btn-sm">↗</a>
                 </td>
             </tr>
+        @endforeach
         </tbody>
     </table>
+    
+    <!-- ページネーション -->
+    <div class="d-flex justify-content-center">
+        {{ $sentences->appends(request()->input())->links() }}
+        </div>
 </div>
 @endsection

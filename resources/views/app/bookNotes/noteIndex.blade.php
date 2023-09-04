@@ -27,7 +27,9 @@
         </div>
         <div class="row">
             <div class="col col-6 three">
-                伊坂幸太郎
+                @foreach($note->authors as $author)
+                    {{ $author->author_name }}
+                @endforeach
             </div>
             <div class="col col-2 four">
                 {{ $note->note_score }}
@@ -65,19 +67,24 @@
         @foreach($notes as $note)
             <tr>
                 <td><a href="/note/detail/{{ $note->id }}">{{ $note->note_title }}</a></td>
-                <td>伊坂幸太郎</td>
+                <td>
+                    @foreach($note->authors as $author)
+                        {{ $author->author_name }}
+                    @endforeach
+                </td>
                 <td>{{ $note->created_at->format('Y/m/d') }}</td>
                 <td>{{ $note->note_score }}</td>
                 <td>
-                    <a href="#" class="btn btn-outline-primary btn-sm">↗</a>
+                    <a href="/note/edit/{{ $note->id }}" class="btn btn-outline-primary btn-sm">↗</a>
                 </td>
                 <td>
-                    <form action="" method="post">
+                    <form action="{{ route('note.detail', $note->id)}}" method="post">
                         <input type="submit" name="delete" class="btn btn-outline-danger btn-sm" value="×">
 
                         <!-- <input type="hidden" th:value="${book.id}" name="id">
                             <input type="hidden" th:value="${book.version}" name="version"> -->
                     </form>
+                    
                 </td>
             </tr>
         @endforeach
