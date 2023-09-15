@@ -1,5 +1,5 @@
 @extends('app.layouts.app')
-
+@section('title', '読みたい本新規登録')
 @section('content')
 <div class="container">
     <h1 class="text-center h1-designed">読みたい本リストを追加</h1>

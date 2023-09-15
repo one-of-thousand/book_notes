@@ -55,7 +55,7 @@ class BookNotesHomeController extends Controller
         $planedBooksCount = $query->get();
 
         //クエリを実行しページネーションしたレコードを取り出す
-        $planedBooks = $query->orderBy('created_at', 'desc')->paginate(10);
+        $planedBooks = $query->orderBy('updated_at', 'desc')->paginate(10);
 
         
         //検索用のプルダウンリストを定数から取得

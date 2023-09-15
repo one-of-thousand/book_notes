@@ -50,7 +50,6 @@ $(function () {
 //抜粋文フォームの追加・削除処
 $(function () {
     $('#sentence-add').on('click', function () {
-
         //要素(ひとつ前のフォーム)のクローンをする
         let element = $('#sentence-area .unit:last-child').clone(true);
 
@@ -77,8 +76,17 @@ $(function () {
 
     //削除ボタンを押したときの処理
     $('#sentence-delete').on('click', function () {
+
+        var value = $(this).parent().parent().parent().siblings().find('input').val();
+        console.log("あああ" + value);
+
         let inputCount = $('#sentence-area .unit').length;
-        if (inputCount > 1) {
+        if(inputCount == 1) {
+            $('#sentence-form-btn').show();
+            // $('#sentence-form-remove-btn').hide();
+            $('#sentence-form').hide();
+            $('.disabled-cancel').prop("disabled", true)
+        } else if(inputCount > 1) {
             $(this).parents('.unit').remove();
         }
         

@@ -1,5 +1,5 @@
 @extends('app.layouts.app')
-
+@section('title', 'Note詳細')
 @section('content')
 <div class="container border-bottom border-3 p-3">
     <div class="row">
@@ -23,7 +23,7 @@
             <a href="/note/edit/{{ $note->id }}" class="btn btn-outline-primary">登録内容を編集する</a>
         </div>
         <div class="col col-6 d-grid gap-2 mx-auto">
-            <form action="/note/delete/{{ $note->id }}" onsubmit="return checkDelete()" method="POST">
+            <form method="POST" action="{{ route('note.delete', $note->id) }}" onsubmit="return checkDelete()">
             @csrf
                 <input type="submit" name="delete" class="btn btn-outline-danger" value="このNoteを削除する" onclick=>
             </form>

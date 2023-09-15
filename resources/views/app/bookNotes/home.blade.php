@@ -1,5 +1,5 @@
 @extends('app.layouts.app')
-
+@section('title', 'ホーム')
 @section('content')
 <!-- 共通 -->
 
@@ -12,12 +12,12 @@
         <tr>
             <th class="col-4">Note総数</th>
             <th class="col-4">抜粋文総数</th>
-            <th class="col-4">6月のNote登録数</th>
+            
         </tr>
         <tr>
             <td class="col-4">{{ $noteNum }}件</td>
             <td class="col-4">{{ $sentenceNum }}文</td>
-            <td class="col-4">10件</td>
+            
         </tr>
     </table>
 </div>
@@ -32,11 +32,6 @@
         {{ session('err_msg') }}
     </p>
     @endif
-
-    <!-- @if ($planedBooks->count() === 0)
-        <p class="text-center">リストはまだ登録されていません。<br>
-        新規追加ボタンから気になっている本を登録しましょう！</p>
-    @endif -->
 
     
 
@@ -166,9 +161,11 @@
 <!-- PC表示用　ここまで -->
 
 <!-- 読書データ表示 -->
-<div class="container">
-    <h2 class="h2-designed text-center">読書データ一覧</h2>
-</div>
+
+
+<script>
+
+</script>
 
 
 @endsection

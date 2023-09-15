@@ -1,5 +1,5 @@
 @extends('app.layouts.app')
-@section('title', '文章編集画面')
+@section('title', '文章編集')
 
 @section('content')
 <div class="container">
@@ -12,6 +12,9 @@
                 <label class="form-label">ページ数</label>
                 <input type="text" class="form-control" name="sentence_page" value="{{ $sentence->sentence_page }}">
             </div>
+            @if($errors->has('sentence_page'))
+                <div class="text-danger">{{ $errors->first('sentence_page') }}</div>
+            @endif
             <div class="col-3 mb-3">
                 <label class="form-label">タグ</label>
                 <select class="form-select" name="tag_id" id="tag_select">
@@ -27,10 +30,16 @@
                 <label class="form-label">抜粋・シーン</label>
                 <textarea class="form-control" name="sentence_body" rows="8">{{ $sentence->sentence_body }}</textarea>
             </div>
+            @if($errors->has('sentence_body'))
+                <div class="text-danger">{{ $errors->first('sentence_body') }}</div>
+            @endif
             <div class="form-group mb-3">
                 <label class="form-label">コメント</label>
                 <textarea class="form-control" name="sentence_memo" rows="2">{{ $sentence->sentence_memo }}</textarea>
             </div>
+            @if($errors->has('sentence_memo'))
+                <div class="text-danger">{{ $errors->first('sentence_memo') }}</div>
+            @endif
         </div>
 
         <div class="row">

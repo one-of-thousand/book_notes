@@ -1,23 +1,34 @@
 @extends('app.layouts.app')
-
+@section('title', '文章一覧')
 @section('content')
 <div class="container">
     <h1 class="text-center h1-designed">抜粋・シーン一覧</h1>
-    <form action="">
-        <div class="form-group">
-            <label class="form-label">単語検索：</label>
-            <input type="text" name="search-word">
-        </div>
-    </form>
-    <div class="text-center">
-        <a href="{{ route('tag.index') }}">タグを編集する</a>
-    </div>
+    
+    
     @if (session('err_msg'))
     <p class="text-danger">
         {{ session('err_msg') }}
     </p>
     @endif
+
+    <form method="GET" action="{{ route('sentence.index') }}">
+        <div class="bg-light m-2 p-1">
+            <div class="form-group text-center">
+                <label class="form-label">単語検索：</label>
+                <input type="text" name="searchWord" value="{{ old('searchWord') }}" placeholder="単語を入力">
+            </div>
+            <div class="form-group">
+
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-info btn-sm">検索開始</button>
+                <button onclick="location.href='/sentence/index'" class="btn btn-secondary btn-sm">検索条件クリア</button>
+            </div>
+        </div>
+    </form>
 </div>
+
+
 
 
 <!-- スマホ用の一覧テーブル -->

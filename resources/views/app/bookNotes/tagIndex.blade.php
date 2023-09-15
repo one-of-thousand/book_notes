@@ -1,5 +1,5 @@
 @extends('app.layouts.app')
-
+@section('title', 'タグ一覧')
 @section('content')
 <div class="container">
     <h1 class="text-center h1-designed">タグ編集</h1>

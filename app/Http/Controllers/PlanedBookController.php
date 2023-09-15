@@ -38,10 +38,21 @@ class PlanedBookController extends Controller
      * 
      * @return view
      */
-    public function planedBookStore(PlanedBookRequest $request) {
+    public function planedBookStore(Request $request) {
         //フォームの入力内容を取得
         $inputs = $request->all();
         // dd($inputs);
+
+        //バリデーション
+        $request->validate([
+            'planed_book_title' => 'required | max:30',
+            'planed_book_author' =>'max:20'
+        ],
+        [
+            'planed_book_title.required' => '書名は必須項目です。',
+            'planed_book_title.max' => '書名は30文字以下で入力してください。',
+            'planed_book_author.max' =>'著者名は20文字以下で入力してください'
+        ]);
 
         //トランザクション処理の開始
         DB::beginTransaction();
@@ -90,10 +101,21 @@ class PlanedBookController extends Controller
      * @param int $id
      * @return view
      */
-    public function planedBookUpdate(PlanedBookRequest $request) {
+    public function planedBookUpdate(Request $request) {
         //フォームの入力内容を取得
         $inputs = $request->all();
         // dd($inputs);
+
+        //バリデーション
+        $request->validate([
+            'planed_book_title' => 'required | max:30',
+            'planed_book_author' =>'max:20'
+        ],
+        [
+            'planed_book_title.required' => '書名は必須項目です。',
+            'planed_book_title.max' => '書名は30文字以下で入力してください。',
+            'planed_book_author.max' =>'著者名は20文字以下で入力してください'
+        ]);
 
         //トランザクション処理の開始
         DB::beginTransaction();

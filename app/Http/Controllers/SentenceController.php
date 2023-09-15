@@ -16,12 +16,26 @@ class SentenceController extends Controller
     /**
      * 文章一覧画面を表示
      */
-    public function sentenceIndex() {
+    public function sentenceIndex(Request $request) {
         //ユーザーの持つ抜粋文の全件を取得
-        $sentences = Auth::user()->sentences()->orderBy('created_at', 'desc')->paginate(10);
-        $sentenceCount = Auth::user()->sentences()->get();
-        // dd($sentences);
+        $query = Auth::user()->sentences();
+        
+        //検索単語が入力されていれば、絞り込み
+        $searchWord = $request->searchWord;
+        if(isset($searchWord)) {
+            $query->where(function($query) use($searchWord) {
+                $query->where('sentence_body', 'LIKE', "%{$searchWord}%")
+                    ->orwhere('sentence_memo', 'LIKE', "%{$searchWord}%");
+            });
+        }
 
+        //件数表示用
+        $sentenceCount = $query->get();
+
+        //クエリ実行
+        $sentences = $query->orderBy('updated_at', 'desc')->paginate(10);
+
+        
         return view('app.bookNotes.sentenceIndex', compact('sentences', 'sentenceCount'));
     }
 
@@ -54,6 +68,20 @@ class SentenceController extends Controller
      */
     public function sentenceUpdate(Request $request) {
         $sentence = $request->all();
+
+        //バリデーション
+        $request->validate([
+            'sentence_page' => 'nullable | regex:/^[0-9]+$/',
+            'sentence_body' => 'required | max:1500',
+            'sentence_memo' => 'max:300',
+        ],
+        [
+        'sentence_page.regex' => '半角数字で入力してください。',  
+        'sentence_body.required' => '文章内容は必須項目です。',  
+        'sentence_body.max' => '1500文字以下で入力してください。',  
+        'sentence_memo.max' => '300文字以下で入力してください。',  
+        ]);
+
         // dd($sentence);
         DB::beginTransaction();
         try {

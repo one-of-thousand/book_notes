@@ -14,8 +14,6 @@
 
     <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
 
-    <!-- jsファイルの読み込み -->
-    <script type="module" src="{{ asset('js/noteForm.js') }}"></script>
     <!-- Private CSS -->
     <link rel="stylesheet" href="/css/common.css">
 </head>

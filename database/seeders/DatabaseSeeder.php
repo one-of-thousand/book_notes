@@ -14,14 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        $this->call(Planed_Book_Star::class);
-        $this->call(Planed_Book_State::class);
+        \App\Models\Tag::truncate();
+        \App\Models\Note::truncate();
+        \App\Models\Sentence::truncate();
     }
 }

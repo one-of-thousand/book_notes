@@ -83,7 +83,9 @@ Route::get('/note/edit/{id}', [NoteController::class, 'noteEdit'])->name('note.e
 //Note更新処理を実行
 Route::post('/note/update', [NoteController::class, 'noteUpdate'])->name('note.update');
 //Noteを削除
-Route::post('/note/delete/{$id}', [NoteController::class, 'noteDelete'])->name('note.delete');
+Route::post('/note/delete/{id}', [NoteController::class, 'noteDelete'])->name('note.delete');
+//Note検索を実行
+Route::get('/note/search', [NoteController::class, 'noteSearch'])->name('note.search');
 
 
 // 抜粋・シーン関係
