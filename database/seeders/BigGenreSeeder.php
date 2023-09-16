@@ -14,6 +14,9 @@ class BigGenreSeeder extends Seeder
     public function run(): void
     {
         BigGenre::create([
+            'big_genre_name' => '未選択'
+        ]);
+        BigGenre::create([
             'big_genre_name' => '小説・文学',
         ]);
         BigGenre::create([
@@ -31,8 +34,6 @@ class BigGenreSeeder extends Seeder
         BigGenre::create([
             'big_genre_name' => '趣味・実用',
         ]);
-        BigGenre::create([
-            'big_genre_name' => '未選択'
-        ]);
+        
     }
 }
