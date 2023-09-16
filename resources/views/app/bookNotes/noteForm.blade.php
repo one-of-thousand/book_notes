@@ -129,12 +129,13 @@
                 @endphp
 
                 @if(session('unitCount') == 0)
+
                 <div class="unit">
                     <div class="card bg-light" style="margin-bottom: 2em; padding: 1em">
                         <div class="form-group row">
                             <div class="col-3 mb-3">
                                 <label class="form-label">ページ数</label>
-                                <input type="text" value="{{ old('sentence_page.0) }}" class="disabled-cancel form-control" name="sentence_page[]">
+                                <input type="text" value="{{ old('sentence_page.0') }}" class="disabled-cancel form-control" name="sentence_page[]">
                             </div>
                             @if($errors->has('sentence_page'))
                             <div class="text-danger">{{ $errors->first('sentence_page.$i') }}</div>
@@ -178,21 +179,19 @@
 
                 @if(session('unitCount') >= 1)
                 @for($i = 0; $i < $unitCount ; $i++) 
-                    <input type="text" value="{{ $i }}">
                     <div class="unit">
                         <div class="card bg-light" style="margin-bottom: 2em; padding: 1em">
                             <div class="form-group row">
                                 <div class="col-3 mb-3">
                                     <label class="form-label">ページ数</label>
-                                    <input type="text" value="{{ old('sentence_page.'.$i') }}" class="disabled-cancel form-control" name="sentence_page[]">
+                                    <input type="text" value="{{ old("sentence_page.{$i}") }}" class="disabled-cancel form-control" name="sentence_page[]">
                                 </div>
                                 @if($errors->has('sentence_page.*'))
-                                <div class="text-danger">{{ $errors->first('sentence_page.$i') }}</div>
+                                <div class="text-danger">{{ $errors->first("sentence_page.{$i}") }}</div>
                                 @endif
                                 <div class="col-3 mb-3">
                                     <label class="form-label">タグ</label>
                                     <select class="disabled-cancel form-select" value="{{ old('tag_id') }}" name="tag[]">
-                                        <option hidden value="">選択してください</option>
                                         @foreach($tags as $key => $value)
                                         <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
@@ -203,17 +202,17 @@
                             <div class="form-group">
                                 <div class="form-group mb-3">
                                     <label class="form-label">抜粋・シーン</label>
-                                    <textarea class="disabled-cancel form-control" value="{{ old('sentence_body.0') }}" name="sentence_body[]" rows="3"></textarea>
+                                    <textarea class="disabled-cancel form-control" value="{{ old("sentence_body.{$i}") }}" name="sentence_body[]" rows="3"></textarea>
                                 </div>
-                                @if($errors->has('sentence_body'))
-                                <div class="text-danger">{{ $errors->first('sentence_body.0') }}</div>
+                                @if($errors->has('sentence_body.*'))
+                                <div class="text-danger">{{ $errors->first("sentence_body.{$i}") }}</div>
                                 @endif
                                 <div class="form-group mb-3">
                                     <label class="form-label">コメント</label>
-                                    <textarea class="disabled-cancel form-control" value="{{ old('sentence_memo.0') }}" name="sentence_memo[]" rows="1"></textarea>
+                                    <textarea class="disabled-cancel form-control" value="{{ old("sentence_memo.{$i}") }}" name="sentence_memo[]" rows="1"></textarea>
                                 </div>
-                                @if($errors->has('sentence_memo'))
-                                <div class="text-danger">{{ $errors->first('sentence_memo.0') }}</div>
+                                @if($errors->has('sentence_memo.*'))
+                                <div class="text-danger">{{ $errors->first("sentence_memo.{$i}") }}</div>
                                 @endif
                                 <div class="text-center">
                                     <span id="sentence-num"></span>

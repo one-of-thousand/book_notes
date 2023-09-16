@@ -71,13 +71,15 @@ class NoteController extends Controller
         
 
         $notes = $request->all();
+        
+        
         // dd($notes);
         //バリデーション
         $request->validate([
             'note_title' => 'required | max:30',
             // 'note_start_reading' => 'nullable | date_format:Y/m/d',
             'author_name.*' => 'filled|max:20',
-            'note_end_reading' => 'date_format:Y/m/d',
+            // 'note_end_reading' => 'date_format:Y/m/d',
             'note_memo' => 'max:400',
             'note_publisher' => 'max:15',
             // 'big_genre_id' => '',
@@ -102,9 +104,9 @@ class NoteController extends Controller
         'note_memo.max' => '400文字以下で入力してください。',
         'note_impression.max' => '1000文字以下で入力してください。',
         //抜粋について  
-        'sentence_page.regex' => '半角数字で入力してください。',  
-        'sentence_body.required' => '必須項目です。',  
-        'sentence_body.max' => '1500文字以下で入力してください。',  
+        'sentence_page.*.regex' => '入力する場合は半角数字です。',  
+        'sentence_body.*.required' => '抜粋内容は必須項目です。',  
+        'sentence_body.*.max' => '1500文字以下で入力してください。',  
         'sentence_memo.max' => '300文字以下で入力してください。',  
         ]);
         // dd($notes);
@@ -270,7 +272,7 @@ class NoteController extends Controller
             'note_title' => 'required | max:30',
             // 'note_start_reading' => 'nullable | date_format:Y/m/d',
             'author_name.*' => 'filled|max:20',
-            'note_end_reading' => 'date_format:Y/m/d',
+            // 'note_end_reading' => 'date_format:Y/m/d',
             'note_memo' => 'max:400',
             'note_publisher' => 'max:15',
             // 'big_genre_id' => '',
@@ -295,9 +297,9 @@ class NoteController extends Controller
         'note_memo.max' => '400文字以下で入力してください。',
         'note_impression.max' => '1000文字以下で入力してください。',
         //抜粋について  
-        'sentence_page.regex' => '半角数字で入力してください。',  
-        'sentence_body.required' => '必須項目です。',  
-        'sentence_body.max' => '1500文字以下で入力してください。',  
+        'sentence_page.*.regex' => '',  
+        'sentence_body.*.required' => '抜粋内容は必須項目です。',  
+        'sentence_body.*.max' => '1500文字以下で入力してください。',  
         'sentence_memo.max' => '300文字以下で入力してください。',  
         ]);
         // dd($notes);

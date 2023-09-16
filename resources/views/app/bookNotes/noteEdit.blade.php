@@ -114,7 +114,14 @@
 
         <h2 class="h2-designed text-center">抜粋・シーンを記録</h2>
 
-
+        @if($errors->has('sentence_page.*') || $errors->has('sentence_body.*') || $errors->has('sentence_memo.*'))
+            <div class="text-danger">
+                入力に誤りがあります。以下をご確認ください<br>
+                ・ページ数は空白か半角数字のみ<br>
+                ・抜粋・シーンは入力が必須かつ1500文字以下<br>
+                ・コメントは300文字以下
+            </div>
+        @endif
 
         <div class="form-group" id="sentence-area">
 
@@ -129,6 +136,9 @@
                                 <label class="form-label">ページ数</label>
                                 <input type="text" class="form-control disabled-cancel" name="sentence_page[]">
                             </div>
+                            @if($errors->has('sentence_page.*'))
+                                <div class="text-danger">{{ $errors->first("sentence_page.{$i}") }}</div>
+                            @endif
                             <div class="col-3 mb-3">
                                 <label class="form-label">タグ</label>
                                 <select class="form-select disabled-cancel" name="tag[]">
@@ -144,10 +154,18 @@
                                 <label class="form-label">抜粋・シーン</label>
                                 <textarea class="form-control disabled-cancel" name="sentence_body[]" rows="3"></textarea>
                             </div>
+                            @if($errors->has('sentence_body.*'))
+                                <div class="text-danger">{{ $errors->first("sentence_body.{$i}") }}</div>
+                            @endif
+
                             <div class="form-group mb-3">
                                 <label class="form-label">コメント</label>
                                 <textarea class="form-control disabled-cancel" name="sentence_memo[]" rows="1"></textarea>
                             </div>
+                            @if($errors->has('sentence_memo.*'))
+                                <div class="text-danger">{{ $errors->first("sentence_memo.{$i}") }}</div>
+                            @endif
+
                             <div class="text-center">
                                 <span class="btn btn-danger sentence-delete" style="margin-bottom: 1.em">削除</span>
                             </div>
@@ -166,6 +184,10 @@
                                 <label class="form-label">ページ数</label>
                                 <input type="text" class="disabled-cancel2 form-control" name="sentence_page[]" value="{{ $sentence->sentence_page }}">
                             </div>
+                            @if($errors->has('sentence_page.*'))
+                                <div class="text-danger">{{ $errors->first("sentence_page") }}</div>
+                            @endif
+
                             <div class="col-3 mb-3">
                                 <label class="form-label">タグ</label>
                                 <select class="disabled-cancel2 form-select" name="tag[]" id="tag_select">
@@ -181,10 +203,17 @@
                                 <label class="form-label">抜粋・シーン</label>
                                 <textarea class="disabled-cancel2 form-control" name="sentence_body[]" rows="3">{{ $sentence->sentence_body }}</textarea>
                             </div>
+                            @if($errors->has('sentence_body.*'))
+                                <div class="text-danger">{{ $errors->first("sentence_body") }}</div>
+                            @endif
+
                             <div class="form-group mb-3">
                                 <label class="form-label">コメント</label>
                                 <textarea class="disabled-cancel2 form-control" name="sentence_memo[]" rows="1">{{ $sentence->sentence_memo }}</textarea>
                             </div>
+                            @if($errors->has('sentence_memo.*'))
+                                <div class="text-danger">{{ $errors->first("sentence_memo") }}</div>
+                            @endif
                             <div class="text-center">
                                 <span id="sentence-num"></span>
                                 <span class="btn btn-danger sentence-delete" style="margin-bottom: 1.em">削除</span>
