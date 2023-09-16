@@ -70,7 +70,6 @@
                     <label class="form-label">大分類を選択</label>
                     <select class="form-select" value="{{ old('big_genre_id') }}" id="big-genre" name="big-genre_id">
 
-                        <option value="7" selected>未選択</option>
                         @foreach($bigGenres as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
@@ -79,11 +78,7 @@
                 <div class="col">
                     <label class="form-label">小分類を選択</label>
                     <select class="form-select" value="{{ old('small_genre_id') }}" name="small-genre_id" id="small-genre_select">
-                        <option value="62" selected>未選択</option>
-                        <!-- <option value=""></option>
-                        @foreach ($smallGenres as $index => $name)
-                            <option value="{{ $index }}">{{ $name }}</option>
-                        @endforeach -->
+                        
 
                     </select>
                 </div>
