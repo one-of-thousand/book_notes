@@ -191,7 +191,7 @@ class NoteController extends Controller
         $sentences = Auth::user()->sentences()->get();
 
 
-        return view('app.booknotes.noteIndex', compact(
+        return view('app.bookNotes.noteIndex', compact(
             'notes',
             'sentences',
             'notesCount'
