@@ -221,7 +221,7 @@ class NoteController extends Controller
             return redirect(route('note.index'));
         }
 
-        return view('app.booknotes.noteDetail', compact('note', 'sentences', 'authors'));
+        return view('app.bookNotes.noteDetail', compact('note', 'sentences', 'authors'));
     }
 
     /**
@@ -248,7 +248,7 @@ class NoteController extends Controller
         // dd($bigGenres);
         // dd($note);
         // dd($sentences);
-        return view('app.booknotes.noteEdit', compact(
+        return view('app.bookNotes.noteEdit', compact(
             'note',
             'bigGenres',
             'smallGenres',
