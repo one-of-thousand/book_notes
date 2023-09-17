@@ -138,7 +138,7 @@
                             <div class="col-3 mb-3">
                                 <label class="form-label">タグ</label>
                                 <select class="disabled-cancel form-select" value="{{ old('tag_id') }}" name="tag[]">
-                                    <option hidden value="">選択してください</option>
+                                    
                                     @foreach($tags as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
                                     @endforeach
