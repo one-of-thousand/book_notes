@@ -112,8 +112,8 @@ class NoteController extends Controller
         // dd($notes);
 
         //登録処理
-        // DB::beginTransaction();
-        // try {
+        DB::beginTransaction();
+        try {
             // notesテーブルへの登録
             $note_items = new Note;
             $note_items->user_id = Auth::user()->id;
@@ -165,11 +165,11 @@ class NoteController extends Controller
                     $sentences->save();
                 }
             };
-        //     DB::commit();
-        // } catch (\Throwable $e) {
-        //     DB::rollBack();
-        //     abort(500);
-        // }
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            abort(500);
+        }
 
 
         return redirect(route('note.index'));
