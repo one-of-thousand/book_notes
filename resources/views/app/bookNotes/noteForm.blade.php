@@ -78,7 +78,7 @@
                 <div class="col">
                     <label class="form-label">小分類を選択</label>
                     <select class="form-select" value="{{ old('small_genre_id') }}" name="small-genre_id" id="small-genre_select">
-                        
+                        <option value="1" hidden>未選択</option>
 
                     </select>
                 </div>

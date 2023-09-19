@@ -78,7 +78,7 @@ class NoteController extends Controller
         $request->validate([
             'note_title' => 'required | max:30',
             // 'note_start_reading' => 'nullable | date_format:Y/m/d',
-            'author_name.*' => 'filled|max:20',
+            // 'author_name.*' => 'filled|max:20',
             // 'note_end_reading' => 'date_format:Y/m/d',
             'note_memo' => 'max:400',
             'note_publisher' => 'max:15',
@@ -112,8 +112,8 @@ class NoteController extends Controller
         // dd($notes);
 
         //登録処理
-        DB::beginTransaction();
-        try {
+        // DB::beginTransaction();
+        // try {
             // notesテーブルへの登録
             $note_items = new Note;
             $note_items->user_id = Auth::user()->id;
@@ -165,11 +165,11 @@ class NoteController extends Controller
                     $sentences->save();
                 }
             };
-            DB::commit();
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            abort(500);
-        }
+        //     DB::commit();
+        // } catch (\Throwable $e) {
+        //     DB::rollBack();
+        //     abort(500);
+        // }
 
 
         return redirect(route('note.index'));
