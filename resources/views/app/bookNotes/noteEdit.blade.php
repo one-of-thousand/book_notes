@@ -174,8 +174,11 @@
                 </div>
             </div>
             @else
-            @foreach($sentences as $sentence)
+
+            
             <div id="sentence-form2">
+            @foreach($sentences as $sentence)
+            
                 <div class="unit">
                     <input class="disabled-cancel2 delete-sentence-id" type="hidden" name="sentence_id[]" value="{{ $sentence->id}}">
                     <div class="card bg-light" style="margin-bottom: 2em; padding: 1em">
@@ -221,9 +224,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
 
             @endforeach
+            </div>
             @endif
 
 
