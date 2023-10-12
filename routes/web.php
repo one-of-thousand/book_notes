@@ -21,10 +21,8 @@ use App\Http\Controllers\TagController;
 |
 */
 
-
-
 Route::get('/', function () {
-    return view('app.bookNotes.home');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
