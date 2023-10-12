@@ -22,7 +22,7 @@ use App\Http\Controllers\TagController;
 */
 
 Route::get('/', function () {
-    return redirect(route('note.index'));
+    return redirect(route('note.home'));
 });
 
 Route::get('/dashboard', function () {
